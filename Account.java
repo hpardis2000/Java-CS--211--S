@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.lang.Math;
 
 public abstract class Account {
     private int accountNo;          // This should be unique so would not have a default (see static variable)
