@@ -9,51 +9,45 @@ public class Checking extends Account {
     private final static boolean DEFAULT_OVERDRAFT_PROTECTION = false;
 
     // Constructors
-    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, LocalDate open,
-                    boolean overdraftProtection) {
-        super(accountNo, accountName, clientID, balance, joint, open);
+    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
+                    LocalDate open, boolean overdraftProtection) {
+        super(accountNo, accountName, clientID, balance, joint, jointID, open);
         this.overdraftProtection = overdraftProtection;
     }
 
-    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, LocalDate open) {
-        super(accountNo, accountName, clientID, balance, joint, open);
+    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
+                    LocalDate open) {
+        super(accountNo, accountName, clientID, balance, joint, jointID, open);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-    public Checking(int accountNo, int clientID, double balance, boolean joint, LocalDate open,
+    public Checking(int accountNo, int clientID, double balance, boolean joint, int jointID, LocalDate open,
                     boolean overdraftProtection) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, open, overdraftProtection);
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, jointID, open, overdraftProtection);
     }
 
-    public Checking(int accountNo, int clientID, double balance, boolean joint, LocalDate open) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, open, DEFAULT_OVERDRAFT_PROTECTION);
+    public Checking(int accountNo, int clientID, double balance, boolean joint, int jointID, LocalDate open) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, jointID, open, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
-    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint,
+    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
                     boolean overdraftProtection) {
-        super(accountNo, accountName, clientID, balance, joint);
+        super(accountNo, accountName, clientID, balance, joint, jointID);
         this.overdraftProtection = overdraftProtection;
     }
 
-    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint) {
-        /*
-        Getting error because it is recognizing the parameter types as redundant with lines 101-104
-        even though it is for different variables. Maybe need to flip type to fix.
-         */
-        super(accountNo, accountName, clientID, balance, joint);
+    public Checking(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID) {
+        super(accountNo, accountName, clientID, balance, joint, jointID);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-    public Checking(int accountNo, int clientID, double balance, boolean joint, boolean overdraftProtection) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, overdraftProtection);
+    public Checking(int accountNo, int clientID, double balance, boolean joint, int jointID,
+                    boolean overdraftProtection) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, jointID, overdraftProtection);
     }
 
-    public Checking(int accountNo, int clientID, double balance, boolean joint) {
-        /*
-        Getting error because it is recognizing the parameter types as redundant with lines 111-113
-        even though it is for different variables. Maybe need to flip type to fix.
-         */
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, DEFAULT_OVERDRAFT_PROTECTION);
+    public Checking(int accountNo, int clientID, double balance, boolean joint, int jointID) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, joint, jointID, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
     public Checking(int accountNo, String accountName, int clientID, double balance, LocalDate open,
@@ -75,67 +69,61 @@ public class Checking extends Account {
         this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, open, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
-    public Checking(int accountNo, String accountName, int clientID, boolean joint, LocalDate open,
+    public Checking(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open,
                     boolean overdraftProtection) {
-        super(accountNo, accountName, clientID, joint, open);
+        super(accountNo, accountName, clientID, joint, jointID, open);
         this.overdraftProtection = overdraftProtection;
     }
 
-    public Checking(int accountNo, String accountName, int clientID, boolean joint, LocalDate open) {
-        super(accountNo, accountName, clientID, joint, open);
+    public Checking(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
+        super(accountNo, accountName, clientID, joint, jointID, open);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-    public Checking(int accountNo, int clientID, boolean joint, LocalDate open, boolean overdraftProtection) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, open, overdraftProtection);
+    public Checking(int accountNo, int clientID, boolean joint, int jointID, LocalDate open,
+                    boolean overdraftProtection) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, jointID, open, overdraftProtection);
     }
 
-    public Checking(int accountNo, int clientID, boolean joint, LocalDate open) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, open, DEFAULT_OVERDRAFT_PROTECTION);
+    public Checking(int accountNo, int clientID, boolean joint, int jointID, LocalDate open) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, jointID, open, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
-//    public Checking(int accountNo, String accountName, int clientID, double balance, boolean overdraftProtection) {
-//        super(accountNo, accountName, clientID, balance);
-//        this.overdraftProtection = overdraftProtection;
-//    }
+    public Checking(int accountNo, String accountName, int clientID, double balance, boolean overdraftProtection) {
+        super(accountNo, accountName, clientID, balance);
+        this.overdraftProtection = overdraftProtection;
+    }
 
     public Checking(int accountNo, String accountName, int clientID, double balance) {
         super(accountNo, accountName, clientID, balance);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-//    public Checking(int accountNo, int clientID, double balance, boolean overdraftProtection) {
-//        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, overdraftProtection);
-//    }
+    public Checking(int accountNo, int clientID, double balance, boolean overdraftProtection) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, overdraftProtection);
+    }
 
     public Checking(int accountNo, int clientID, double balance) {
         this(accountNo, DEFAULT_CHECKING_NAME, clientID, balance, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
-    public Checking(int accountNo, String accountName, int clientID, boolean joint, boolean overdraftProtection) {
-        super(accountNo, accountName, clientID, joint);
+    public Checking(int accountNo, String accountName, int clientID, boolean joint, int jointID,
+                    boolean overdraftProtection) {
+        super(accountNo, accountName, clientID, joint, jointID);
         this.overdraftProtection = overdraftProtection;
     }
 
-    public Checking(int accountNo, String accountName, int clientID, boolean joint) {
-        /*
-        Getting error because it is recognizing the parameter types as redundant with lines 163-166
-        even though it is for different variables. Maybe need to flip type to fix.
-         */
-        super(accountNo, accountName, clientID, joint);
+    public Checking(int accountNo, String accountName, int clientID, boolean joint, int jointID) {
+        super(accountNo, accountName, clientID, joint, jointID);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-    public Checking(int accountNo, int clientID, boolean joint, boolean overdraftProtection) {
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, overdraftProtection);
+    public Checking(int accountNo, int clientID, boolean joint, int jointID, boolean overdraftProtection) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, jointID, overdraftProtection);
     }
 
-    public Checking(int accountNo, int clientID, boolean joint) {
-        /*
-        Getting error because it is recognizing the parameter types as redundant with lines 173-175
-        even though it is for different variables. Maybe need to flip type to fix.
-         */
-        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, DEFAULT_OVERDRAFT_PROTECTION);
+    public Checking(int accountNo, int clientID, boolean joint, int jointID) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, joint, jointID, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
     public Checking(int accountNo, String name, int clientID, LocalDate open, boolean overdraftProtection) {
@@ -156,19 +144,19 @@ public class Checking extends Account {
         this(accountNo, DEFAULT_CHECKING_NAME, clientID, open, DEFAULT_OVERDRAFT_PROTECTION);
     }
 
-//    public Checking(int accountNo, String name, int clientID, boolean overdraftProtection) {
-//        super(accountNo, name, clientID);
-//        this.overdraftProtection = overdraftProtection;
-//    }
+    public Checking(int accountNo, String name, int clientID, boolean overdraftProtection) {
+        super(accountNo, name, clientID);
+        this.overdraftProtection = overdraftProtection;
+    }
 
     public Checking(int accountNo, String name, int clientID) {
         super(accountNo, name, clientID);
         this.overdraftProtection = DEFAULT_OVERDRAFT_PROTECTION;
     }
 
-//    public Checking(int accountNo, int clientID, boolean overdraftProtection) {
-//        this(accountNo, DEFAULT_CHECKING_NAME, clientID, overdraftProtection);
-//    }
+    public Checking(int accountNo, int clientID, boolean overdraftProtection) {
+        this(accountNo, DEFAULT_CHECKING_NAME, clientID, overdraftProtection);
+    }
 
     public Checking(int accountNo, int clientID) {
         this(accountNo, DEFAULT_CHECKING_NAME, clientID, DEFAULT_OVERDRAFT_PROTECTION);
@@ -199,7 +187,8 @@ public class Checking extends Account {
                     super.getClientID() == other.getClientID() &&
                     (Math.abs(super.getBalance() - other.getBalance()) < .01) &&
                     super.isJoint() == other.isJoint() && super.getOpen().equals(other.getOpen()) &&
-                    super.getClose().equals(other.getClose()) && this.overdraftProtection == other.overdraftProtection);
+                    super.getJointID() == other.getJointID() && super.getClose().equals(other.getClose()) &&
+                    this.overdraftProtection == other.overdraftProtection);
         } else {
             return false;
         }

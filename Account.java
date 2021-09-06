@@ -152,26 +152,16 @@ public abstract class Account {
                 "\n\tClient ID: " + clientID +
                 "\n\tAccount Balance: " + balance +
                 "\n\tJoint Account: " + (joint ? "yes" : "no") +
+                "\n\tJoint ID: " + (joint ? jointID : "N/A") +
                 "\n\tOpen Date: " + open +
                 "\n\tClose Date: " + close;
     }
 
-    // equals - since this is Abstract and there's never an Account object, would this just be left blank?
+    // abstract equals
     @Override
     public abstract boolean equals(Object obj);
-//    {
-//        if (obj instanceof Account) {
-//            Account other = (Account) obj;
-//            return (this.accountNo == other.accountNo && this.accountName.equalsIgnoreCase(other.accountName) &&
-//                    this.clientID == other.clientID && (Math.abs(this.balance - other.balance) < .01) &&
-//                    this.joint == other.joint && this.open.equals(other.open) && this.close.equals(other.close));
-//        } else {
-//            return false;
-//        }
-//    }
 
     // Class-Specific Methods
-
     public void deposit(double amount) {
         this.balance += amount;
         printBalance();
@@ -189,5 +179,4 @@ public abstract class Account {
     public void printBalance() {
         System.out.println("Current balance: " + balance);
     }
-
 }
