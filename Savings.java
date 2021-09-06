@@ -3,40 +3,88 @@ import java.lang.Math;
 
 public class Savings extends Account {
 
-    public Savings(int accountNo, String accountName, int clientID, double balance, boolean joint, LocalDate open) {
-        super(accountNo, accountName, clientID, balance, joint, open);
+    private final static String DEFAULT_SAVINGS_NAME = "General Savings Account";
+
+    // Constructors
+    public Savings(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
+                   LocalDate open) {
+        super(accountNo, accountName, clientID, balance, joint, jointID, open);
     }
 
-    public Savings(int accountNo, String accountName, int clientID, double balance, boolean joint) {
-        super(accountNo, accountName, clientID, balance, joint);
+    public Savings(int accountNo, int clientID, double balance, boolean joint, int jointID,
+                   LocalDate open) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, balance, joint, jointID, open);
+    }
+
+    public Savings(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID) {
+        super(accountNo, accountName, clientID, balance, joint, jointID);
+    }
+
+    public Savings(int accountNo, int clientID, double balance, boolean joint, int jointID) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, balance, joint, jointID);
     }
 
     public Savings(int accountNo, String accountName, int clientID, double balance, LocalDate open) {
         super(accountNo, accountName, clientID, balance, open);
     }
 
-    public Savings(int accountNo, String accountName, int clientID, boolean joint, LocalDate open) {
-        super(accountNo, accountName, clientID, joint, open);
+    public Savings(int accountNo , int clientID, double balance, LocalDate open) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, balance, open);
+    }
+
+    public Savings(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
+        super(accountNo, accountName, clientID, joint, jointID, open);
+    }
+
+    public Savings(int accountNo, int clientID, boolean joint, int jointID, LocalDate open) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, joint, jointID, open);
     }
 
     public Savings(int accountNo, String accountName, int clientID, double balance) {
         super(accountNo, accountName, clientID, balance);
     }
 
-    public Savings(int accountNo, String accountName, int clientID, boolean joint) {
-        super(accountNo, accountName, clientID, joint);
+    public Savings(int accountNo, int clientID, double balance) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, balance);
+    }
+
+    public Savings(int accountNo, String accountName, int clientID, boolean joint, int jointID) {
+        super(accountNo, accountName, clientID, joint, jointID);
+    }
+
+    public Savings(int accountNo, int clientID, boolean joint, int jointID) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, joint, jointID);
     }
 
     public Savings(int accountNo, String accountName, int clientID, LocalDate open) {
         super(accountNo, accountName, clientID, open);
     }
 
+    public Savings(int accountNo, int clientID, LocalDate open) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID, open);
+    }
+
     public Savings(int accountNo, String accountName, int clientID) {
         super(accountNo, accountName, clientID);
     }
 
+    public Savings(int accountNo, int clientID) {
+        super(accountNo, DEFAULT_SAVINGS_NAME, clientID);
+    }
+
+    // equals
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof Savings) {
+            Savings other = (Savings) obj;
+            return (super.getAccountNo() == other.getAccountNo() &&
+                    super.getAccountName().equalsIgnoreCase(other.getAccountName()) &&
+                    super.getClientID() == other.getClientID() &&
+                    (Math.abs(super.getBalance() - other.getBalance()) < .01) &&
+                    super.isJoint() == other.isJoint() && super.getOpen().equals(other.getOpen()) &&
+                    super.getJointID() == other.getJointID() && super.getClose().equals(other.getClose()));
+        } else {
+            return false;
+        }
     }
 }
