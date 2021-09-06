@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.lang.Math;
 
 public abstract class Account {
-    private int accountNo;          // This should be unique so would not have a default
+    private int accountNo;          // This should be unique so would not have a default (see static variable)
     private String accountName;     // Default account name should be at child class
     private int clientID;
     private double balance;
@@ -11,20 +11,42 @@ public abstract class Account {
     private LocalDate open;         // Represents date (year, month, day (yyyy-MM-dd))
     private LocalDate close;
 
+    private static int nextAccountNo = 1;           // Increment account number to avoid duplications
     private final static double DEFAULT_BALANCE = 0;
     private final static boolean DEFAULT_JOINT = false;
     private final static int DEFAULT_JOINTID = -1;
     private final static LocalDate DEFAULT_OPEN_DATE = LocalDate.now();
     private final static LocalDate DEFAULT_CLOSE_DATE = null;
 
-    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
+    // Constructors
+//    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
+//                   LocalDate open) {
+//        if (accountNo <= 0 || clientID <= 0) {
+//            throw new IllegalArgumentException("Account number or client ID cannot be less than or equal to 0.");
+//        } else if (joint && !(jointID > 0)) {
+//            throw new IllegalArgumentException("Joint ID is required for joint accounts and cannot be less than 1.");
+//        } else {
+//            this.accountNo = accountNo;
+//            this.accountName = accountName;
+//            this.clientID = clientID;
+//            this.balance = balance;
+//            this.joint = joint;
+//            this.jointID = jointID;
+//            this.open = open;
+//            this.close = DEFAULT_CLOSE_DATE;
+//        }
+//    }
+
+    // Utilizing automatic assignment of account number
+    public Account(String accountName, int clientID, double balance, boolean joint, int jointID,
                    LocalDate open) {
-        if (accountNo <= 0 || clientID <= 0) {
-            throw new IllegalArgumentException("Account number or client ID cannot be less than or equal to 0.");
+        if (clientID <= 0) {
+            throw new IllegalArgumentException("Client ID cannot be less than 1.");
         } else if (joint && !(jointID > 0)) {
             throw new IllegalArgumentException("Joint ID is required for joint accounts and cannot be less than 1.");
         } else {
-            this.accountNo = accountNo;
+            this.accountNo = nextAccountNo;
+            nextAccountNo++;
             this.accountName = accountName;
             this.clientID = clientID;
             this.balance = balance;
@@ -35,33 +57,60 @@ public abstract class Account {
         }
     }
 
-    // Constructors
-    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID) {
-        this(accountNo, accountName, clientID, balance, joint, jointID, DEFAULT_OPEN_DATE);
+//    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID) {
+//        this(accountNo, accountName, clientID, balance, joint, jointID, DEFAULT_OPEN_DATE);
+//    }
+
+    public Account(String accountName, int clientID, double balance, boolean joint, int jointID) {
+        this(accountName, clientID, balance, joint, jointID, DEFAULT_OPEN_DATE);
     }
 
-    public Account(int accountNo, String accountName, int clientID, double balance, LocalDate open) {
-        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, open);
+//    public Account(int accountNo, String accountName, int clientID, double balance, LocalDate open) {
+//        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, open);
+//    }
+
+    public Account(String accountName, int clientID, double balance, LocalDate open) {
+        this(accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, open);
     }
 
-    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
-        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, open);
+//    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
+//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, open);
+//    }
+
+    public Account(String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
+        this(accountName, clientID, DEFAULT_BALANCE, joint, jointID, open);
     }
 
-    public Account(int accountNo, String accountName, int clientID, double balance) {
-        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
+//    public Account(int accountNo, String accountName, int clientID, double balance) {
+//        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
+//    }
+
+    public Account(String accountName, int clientID, double balance) {
+        this(accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
     }
 
-    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID) {
-        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, DEFAULT_OPEN_DATE);
+//    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID) {
+//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, DEFAULT_OPEN_DATE);
+//    }
+
+    public Account(String accountName, int clientID, boolean joint, int jointID) {
+        this(accountName, clientID, DEFAULT_BALANCE, joint, jointID, DEFAULT_OPEN_DATE);
     }
 
-    public Account(int accountNo, String accountName, int clientID, LocalDate open) {
-        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, open);
+//    public Account(int accountNo, String accountName, int clientID, LocalDate open) {
+//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, open);
+//    }
+
+    public Account(String accountName, int clientID, LocalDate open) {
+        this(accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, open);
     }
 
-    public Account(int accountNo, String accountName, int clientID) {
-        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
+//    public Account(int accountNo, String accountName, int clientID) {
+//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
+//    }
+
+    public Account(String accountName, int clientID) {
+        this(accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
     }
 
     // Getters and Setters
@@ -69,10 +118,16 @@ public abstract class Account {
         return accountNo;
     }
 
-    public void setAccountNo(int accountNo) {
-        if (accountNo >= 0) {
-            this.accountNo = accountNo;
-        }
+//    public void setAccountNo(int accountNo) {
+//        if (accountNo >= 0) {
+//            this.accountNo = accountNo;
+//        }
+//    }
+
+    // Automatically sets account number based on next available number to avoid duplicates
+    public void setAccountNo() {
+        this.accountNo = nextAccountNo;
+        nextAccountNo++;
     }
 
     public String getAccountName() {
