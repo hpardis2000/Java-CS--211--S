@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public abstract class Account {
     private int accountNo;          // This should be unique so would not have a default
-    private String accountName;            // Default account name should be at child class
+    private String accountName;     // Default account name should be at child class
     private int clientID;
     private double balance;
     private boolean joint;          // Maybe only add in personal account if we separate account types further
