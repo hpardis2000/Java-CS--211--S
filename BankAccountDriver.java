@@ -27,6 +27,32 @@ public class BankAccountDriver {
 		
 //		BankAccount account1=new BankAccount(bank1,client1,"personal",100);
 //		System.out.println(account1);
+		
+		
+		
+		// TEST CHECKING CLASS
+		
+		int checkingAccountNo1 = 1000000001;
+		int clientIdNo1 = 101;
+		LocalDate today = Localdate.now();
+		boolean overdraftProtection = true;
+		boolean joint = false;
+		double balance = 0.0;
+		String checkingAccountName = "LastName0, FirstName0";
+		
+		Checking checkingAccount = new Checking(checkingAccountNo1, checkingAccountName, clientIdNo1, balance, joint, today, overdraftProtection);
+		
+		// this line is wrong. will have to redo checking account logic later
+		checking.setOverdraftProtection(overdraftProtection);
+		
+		// TESTING TOSTRING() METHOD
+		System.out.println("New checking account: " + checkingAccount.toString());
+		
+		// TESTING EQAULS() METHOD
+		if (Checking.equals(checkingAccount) 
+		{
+			System.out.println("New checking account:  " + checkingAccount.toString() + " belongs to checking accounts");
+		}
 	}
 
 }
