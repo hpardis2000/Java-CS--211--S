@@ -19,22 +19,22 @@ public class Bank {
 	// Getter and Setter 
 	
 	public int getBankId() {
-		return bankId;
+		return this.bankId;
 	}
 	public void setBankId(int bankId) {
-		bankId = bankId;
+		this.bankId = bankId;
 	}
 	public String getBankName() {
-		return bankName;
+		return this.bankName;
 	}
 	public void setBankName(String bankName) {
-		bankName = bankName;
+		this.bankName = bankName;
 	}
 	public String getBankAddress() {
-		return bankAddress;
+		return this.bankAddress;
 	}
 	public void setBankAddress(String bankAddress) {
-		bankAddress = bankAddress;
+		this.bankAddress = bankAddress;
 	}
 
 	

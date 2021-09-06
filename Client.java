@@ -40,19 +40,19 @@ public class Client {
 	// Getter and Setter 
 	
 	public int getClientId() {
-		return clientId;
+		return this.clientId;
 	}
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
 	public String getClientName() {
-		return clientName;
+		return this.clientName;
 	}
 	public void setClientName(String clientName) {
 		this.clientName = clientName;
 	}
 	public String getClientAddress() {
-		return clientAddress;
+		return this.clientAddress;
 	}
 	public void setClientAddress(String clientAddress) {
 		this.clientAddress = clientAddress;

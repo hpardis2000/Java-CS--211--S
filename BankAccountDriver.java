@@ -23,6 +23,10 @@ public class BankAccountDriver {
 		System.out.println(bank1);
 		System.out.println("Bank3.equals(Bank2)= " + bank3.equals( bank2));
 		System.out.println("Bank3.equals(Bank1)= " +bank3.equals(bank1));
+		
+		
+		BankAccount account1=new BankAccount(bank1,client1,"personal",100);
+		System.out.println(account1);
 	}
 
 }
