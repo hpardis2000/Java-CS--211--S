@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 public class BankAccountDriver {
 
@@ -24,10 +25,46 @@ public class BankAccountDriver {
 		System.out.println("Bank3.equals(Bank2)= " + bank3.equals( bank2));
 		System.out.println("Bank3.equals(Bank1)= " +bank3.equals(bank1));
 		
-		
-//		BankAccount account1=new BankAccount(bank1,client1,"personal",100);
-//		System.out.println(account1);
-		
+		// Test automated account number assignment
+
+		Checking checkAcct1 = new Checking(client1.getClientId(), 5500);
+		Savings savingsAcct1 = new Savings(client2.getClientId(), 10000);
+		Credit creditAcct1 = new Credit(client3.getClientId(), -777);
+
+		System.out.println(creditAcct1.toString());
+		System.out.println(savingsAcct1.toString());
+		System.out.println(checkAcct1.toString());
+
+		/*
+		Account:
+			Account No.: 3
+			Account Name: General Credit Line
+			Client ID: 103
+			Account Balance: -777.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+		Account:
+			Account No.: 2
+			Account Name: General Savings Account
+			Client ID: 102
+			Account Balance: 10000.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+		Account:
+			Account No.: 1
+			Account Name: General Checking Account
+			Client ID: 101
+			Account Balance: 5500.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+			Overdraft Protection: no
+		 */
 		
 		
 		// TEST CHECKING CLASS
@@ -42,6 +79,7 @@ public class BankAccountDriver {
 		double balance = 0.0;
 		String checkingAccountName1 = "LastName0, FirstName0";
 		String checkingAccountName2 = "LastName1, FirstName1";
+<<<
 
 		// TODO: redo CheckingAccount constructor and remove 0 here. Constructor should not require jointID if joint is false
 		Checking checkingAccount1 = new Checking(checkingAccountNo1, checkingAccountName1, clientIdNo1, balance, joint, 0, today, overdraftProtection);
