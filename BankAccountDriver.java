@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 public class BankAccountDriver {
 
@@ -24,10 +25,46 @@ public class BankAccountDriver {
 		System.out.println("Bank3.equals(Bank2)= " + bank3.equals( bank2));
 		System.out.println("Bank3.equals(Bank1)= " +bank3.equals(bank1));
 		
-		
-//		BankAccount account1=new BankAccount(bank1,client1,"personal",100);
-//		System.out.println(account1);
-		
+		// Test automated account number assignment
+
+		Checking checkAcct1 = new Checking(client1.getClientId(), 5500);
+		Savings savingsAcct1 = new Savings(client2.getClientId(), 10000);
+		Credit creditAcct1 = new Credit(client3.getClientId(), -777);
+
+		System.out.println(creditAcct1.toString());
+		System.out.println(savingsAcct1.toString());
+		System.out.println(checkAcct1.toString());
+
+		/*
+		Account:
+			Account No.: 3
+			Account Name: General Credit Line
+			Client ID: 103
+			Account Balance: -777.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+		Account:
+			Account No.: 2
+			Account Name: General Savings Account
+			Client ID: 102
+			Account Balance: 10000.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+		Account:
+			Account No.: 1
+			Account Name: General Checking Account
+			Client ID: 101
+			Account Balance: 5500.0
+			Joint Account: no
+			Joint ID: N/A
+			Open Date: 2021-09-06
+			Close Date: null
+			Overdraft Protection: no
+		 */
 		
 		
 		// TEST CHECKING CLASS
@@ -36,27 +73,27 @@ public class BankAccountDriver {
 		int checkingAccountNo2 = 1000000002;
 		int clientIdNo1 = 101;
 		int clientIdNo2 = 102;
-		LocalDate today = Localdate.now();
+		LocalDate today = LocalDate.now();
 		boolean overdraftProtection = true;
 		boolean joint = false;
 		double balance = 0.0;
 		String checkingAccountName1 = "LastName0, FirstName0";
 		String checkingAccountName2 = "LastName1, FirstName1";
 		
-		Checking checkingAccount1 = new Checking(checkingAccountNo1, checkingAccountName1, clientIdNo1, balance, joint, today, overdraftProtection);
-		Checking checkingAccount2 = new Checking(checkingAccountNo2, checkingAccountName2, clientIdNo2, balance, joint, today, overdraftProtection);
-		
-		// this line is wrong. will have to redo checking account logic later
-		checking.setOverdraftProtection(overdraftProtection);
-		
-		// TESTING TOSTRING() METHOD
-		System.out.println("New checking account: " + checkingAccount1.toString());
-		
-		// TESTING EQAULS() METHOD
-		if (checkingAccount1.equals(checkingAccount2) 
-		{
-			System.out.println("New checking account:  " + checkingAccount2.toString() + " belong to " + checkingAccount1.toString());
-		}
+//		Checking checkingAccount1 = new Checking(checkingAccountNo1, checkingAccountName1, clientIdNo1, balance, joint, today, overdraftProtection);
+//		Checking checkingAccount2 = new Checking(checkingAccountNo2, checkingAccountName2, clientIdNo2, balance, joint, today, overdraftProtection);
+//
+//		// this line is wrong. will have to redo checking account logic later
+//		checking.setOverdraftProtection(overdraftProtection);
+//
+//		// TESTING TOSTRING() METHOD
+//		System.out.println("New checking account: " + checkingAccount1.toString());
+//
+//		// TESTING EQUALS() METHOD
+//		if (checkingAccount1.equals(checkingAccount2)
+//		{
+//			System.out.println("New checking account:  " + checkingAccount2.toString() + " belong to " + checkingAccount1.toString());
+//		}
 	}
 
 }
