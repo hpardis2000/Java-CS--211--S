@@ -330,13 +330,7 @@ public class Checking extends Account {
     public boolean equals(Object obj) {
         if (obj instanceof Checking) {
             Checking other = (Checking) obj;
-            return (super.getAccountNo() == other.getAccountNo() &&
-                    super.getAccountName().equalsIgnoreCase(other.getAccountName()) &&
-                    super.getClientID() == other.getClientID() &&
-                    (Math.abs(super.getBalance() - other.getBalance()) < .01) &&
-                    super.isJoint() == other.isJoint() && super.getOpen().equals(other.getOpen()) &&
-                    super.getJointID() == other.getJointID() && super.getClose().equals(other.getClose()) &&
-                    this.overdraftProtection == other.overdraftProtection);
+            return (super.equals(obj) && overdraftProtection == other.overdraftProtection);
         } else {
             return false;
         }

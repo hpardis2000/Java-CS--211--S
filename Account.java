@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.lang.Math;
 
 public abstract class Account {
     private int accountNo;          // This should be unique so would not have a default (see static variable)
@@ -18,24 +19,6 @@ public abstract class Account {
     private final static LocalDate DEFAULT_CLOSE_DATE = null;
 
     // Constructors
-//    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID,
-//                   LocalDate open) {
-//        if (accountNo <= 0 || clientID <= 0) {
-//            throw new IllegalArgumentException("Account number or client ID cannot be less than or equal to 0.");
-//        } else if (joint && !(jointID > 0)) {
-//            throw new IllegalArgumentException("Joint ID is required for joint accounts and cannot be less than 1.");
-//        } else {
-//            this.accountNo = accountNo;
-//            this.accountName = accountName;
-//            this.clientID = clientID;
-//            this.balance = balance;
-//            this.joint = joint;
-//            this.jointID = jointID;
-//            this.open = open;
-//            this.close = DEFAULT_CLOSE_DATE;
-//        }
-//    }
-
     // Utilizing automatic assignment of account number
     public Account(String accountName, int clientID, double balance, boolean joint, int jointID,
                    LocalDate open) {
@@ -56,57 +39,29 @@ public abstract class Account {
         }
     }
 
-//    public Account(int accountNo, String accountName, int clientID, double balance, boolean joint, int jointID) {
-//        this(accountNo, accountName, clientID, balance, joint, jointID, DEFAULT_OPEN_DATE);
-//    }
-
     public Account(String accountName, int clientID, double balance, boolean joint, int jointID) {
         this(accountName, clientID, balance, joint, jointID, DEFAULT_OPEN_DATE);
     }
-
-//    public Account(int accountNo, String accountName, int clientID, double balance, LocalDate open) {
-//        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, open);
-//    }
 
     public Account(String accountName, int clientID, double balance, LocalDate open) {
         this(accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, open);
     }
 
-//    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
-//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, open);
-//    }
-
     public Account(String accountName, int clientID, boolean joint, int jointID, LocalDate open) {
         this(accountName, clientID, DEFAULT_BALANCE, joint, jointID, open);
     }
-
-//    public Account(int accountNo, String accountName, int clientID, double balance) {
-//        this(accountNo, accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
-//    }
 
     public Account(String accountName, int clientID, double balance) {
         this(accountName, clientID, balance, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
     }
 
-//    public Account(int accountNo, String accountName, int clientID, boolean joint, int jointID) {
-//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, joint, jointID, DEFAULT_OPEN_DATE);
-//    }
-
     public Account(String accountName, int clientID, boolean joint, int jointID) {
         this(accountName, clientID, DEFAULT_BALANCE, joint, jointID, DEFAULT_OPEN_DATE);
     }
 
-//    public Account(int accountNo, String accountName, int clientID, LocalDate open) {
-//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, open);
-//    }
-
     public Account(String accountName, int clientID, LocalDate open) {
         this(accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, open);
     }
-
-//    public Account(int accountNo, String accountName, int clientID) {
-//        this(accountNo, accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
-//    }
 
     public Account(String accountName, int clientID) {
         this(accountName, clientID, DEFAULT_BALANCE, DEFAULT_JOINT, DEFAULT_JOINTID, DEFAULT_OPEN_DATE);
@@ -117,14 +72,8 @@ public abstract class Account {
         return accountNo;
     }
 
-//    public void setAccountNo(int accountNo) {
-//        if (accountNo >= 0) {
-//            this.accountNo = accountNo;
-//        }
-//    }
-
-    // Automatically sets account number based on next available number to avoid duplicates
     public void setAccountNo() {
+        // Automatically sets account number based on next available number to avoid duplicates
         this.accountNo = nextAccountNo;
         nextAccountNo++;
     }
@@ -141,7 +90,7 @@ public abstract class Account {
         return clientID;
     }
 
-    public void setClientID(int clientID) {     // Not sure we should allow the client to be changed as security
+    public void setClientID(int clientID) {
         if (clientID >= 0) {
             this.clientID = clientID;
         }
@@ -167,7 +116,6 @@ public abstract class Account {
         } else if (!joint) {
             jointID = DEFAULT_JOINTID;
         }
-
     }
 
     public int getJointID() {
@@ -195,7 +143,10 @@ public abstract class Account {
     }
 
     public void setClose(LocalDate close) {
-        this.close = close;
+        // Updates close date if it is same or later date than open date
+        if (close.compareTo(open) >= 0) {
+            this.close = close;
+        }
     }
 
     // toString
@@ -211,21 +162,37 @@ public abstract class Account {
                 "\n\tClose Date: " + close;
     }
 
-    // abstract equals
+    // equals
     @Override
-    public abstract boolean equals(Object obj);
+    public boolean equals(Object obj) {
+        if (obj instanceof Account) {
+            Account other = (Account) obj;
+            return (accountNo == other.getAccountNo() && accountName.equalsIgnoreCase(other.getAccountName()) &&
+                    clientID == other.getClientID() && (Math.abs(balance - other.getBalance()) < .01) &&
+                    joint == other.isJoint() && jointID == other.getJointID() &&
+                    (open.compareTo(other.getOpen()) == 0) && (close.compareTo(other.getClose()) == 0));
+        } else {
+            return false;
+        }
+    }
 
     // Class-Specific Methods
     public void deposit(double amount) {
-        this.balance += amount;
-        printBalance();
+        if (amount < 0) {
+            System.out.println("Deposit cannot be negative.");
+        } else {
+            this.balance += amount;
+            printBalance();
+        }
     }
 
     public void withdrawal(double amount) {
-        if (amount > balance) {
+        if (amount > 0) {
+            System.out.println("Withdrawal should be negative.");
+        } else if (Math.abs(amount) > balance) {
             System.out.println("Insufficient funds");
         } else {
-            this.balance -= amount;
+            this.balance += amount;
             printBalance();
         }
     }
