@@ -4,7 +4,7 @@ import java.lang.Math;
 public abstract class Account {
     private int accountNo;          // This should be unique so would not have a default (see static variable)
     private String accountName;     // Default account name should be at child class
-    private int clientID;
+    private int clientID;           // Future versions would have this and jointD be Client objects
     private double balance;
     private boolean joint;          // Maybe only add in personal account if we separate client types further
     private int jointID;            // Default to -1 if joint is false
@@ -16,7 +16,7 @@ public abstract class Account {
     private final static boolean DEFAULT_JOINT = false;
     private final static int DEFAULT_JOINTID = -1;
     private final static LocalDate DEFAULT_OPEN_DATE = LocalDate.now();
-    private final static LocalDate DEFAULT_CLOSE_DATE = null;
+    private final static int DEFAULT_CLOSE_TERM = 100;
 
     // Constructors
     // Utilizing automatic assignment of account number
@@ -35,7 +35,7 @@ public abstract class Account {
             this.joint = joint;
             this.jointID = jointID;
             this.open = open;
-            this.close = DEFAULT_CLOSE_DATE;
+            this.close = open.plusYears(DEFAULT_CLOSE_TERM);
         }
     }
 
@@ -90,6 +90,7 @@ public abstract class Account {
         return clientID;
     }
 
+    // Should be rare but in cases of transfer of accounts to other parties for death or divorce, etc.
     public void setClientID(int clientID) {
         if (clientID >= 0) {
             this.clientID = clientID;
@@ -100,6 +101,8 @@ public abstract class Account {
         return balance;
     }
 
+    // Consider in future versions whether this should be an option or if all balances default to zero and only
+    // deposit and withdrawal methods are used.
     public void setBalance(double balance) {
         this.balance = balance;
     }
@@ -143,7 +146,7 @@ public abstract class Account {
     }
 
     public void setClose(LocalDate close) {
-        // Updates close date if it is same or later date than open date
+        // Updates close date if it is same or a later date than open date
         if (close.compareTo(open) >= 0) {
             this.close = close;
         }
@@ -186,6 +189,8 @@ public abstract class Account {
         }
     }
 
+    // Currently have amount as negative for withdrawals since Credit balances would be negative; however, if it
+    // makes more sense to change to positive, adjust formulas throughout.
     public void withdrawal(double amount) {
         if (amount > 0) {
             System.out.println("Withdrawal should be negative.");
