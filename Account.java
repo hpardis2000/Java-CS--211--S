@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Random;
 import java.lang.Math;
 
 public abstract class Account {
@@ -161,5 +162,13 @@ public abstract class Account {
 
     public void printBalance() {
         System.out.println("Current balance: " + balance);
+    }
+    
+    public static int generateAccountNumber()
+    {
+    	Random rand = new Random();
+    	int newAccountNumber = rand.nextInt(1000000000);
+    	
+    	return newAccountNumber;
     }
 }

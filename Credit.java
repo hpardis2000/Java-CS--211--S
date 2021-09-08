@@ -40,4 +40,5 @@ public class Credit extends Account {
     public boolean equals(Object obj) {
         return false;
     }
+    
 }
