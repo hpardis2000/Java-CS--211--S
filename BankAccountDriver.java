@@ -84,9 +84,6 @@ public class BankAccountDriver {
 		Checking checkingAccount1 = new Checking(checkingAccountNo1, checkingAccountName1, clientIdNo1, balance, joint, 0, today, overdraftProtection);
 		Checking checkingAccount2 = new Checking(checkingAccountNo2, checkingAccountName2, clientIdNo2, balance, joint, 0, today, overdraftProtection);
 
-		// this line is wrong. will have to redo checking account logic later
-		checkingAccount1.setOverdraftProtection(overdraftProtection);
-
 		// TESTING TOSTRING() METHOD
 		System.out.println("New checking account: " + checkingAccount1.toString());
 
@@ -101,11 +98,77 @@ public class BankAccountDriver {
 		
 		/************** DRIVER IS HERE **************/
 		// DRIVER PROGRAM
-		Account[] accArr = new Account[10];
-		accArr[0] = checkAcct1;
-		accArr[1] = savingsAcct1;
-		accArr[2] = creditAcct1;
-		driver(accArr);
+		Account[] childrenAccounts = new Account[10];
+		childrenAccounts[0] = checkAcct1;
+		childrenAccounts[1] = savingsAcct1;
+		childrenAccounts[2] = creditAcct1;
+		for (int i = 0; i < childrenAccounts.length; i++)
+		{
+			if (childrenAccounts[i] instanceof Checking)
+			{
+				Checking checkingAcc = (Checking) childrenAccounts[i];
+				System.out.println("\n\nThe current array member " + i  + ": is of type of Checking account ");
+				
+				if (!checkingAcc.isOverdraftProtection()) 
+				{
+					System.out.println("Current balance on your checkingAccount: " + checkingAcc.getBalance());
+					double withdrawalAmount = -1000000000.99;
+					System.out.println("Withdrawal amount: " + withdrawalAmount + ". Withdrawing...");
+					checkingAcc.withdrawal(withdrawalAmount);
+					System.out.println("Current balance of checking Account: " + checkingAcc.getBalance());
+				}
+			}
+			
+			if (childrenAccounts[i] instanceof Credit)
+			{
+				Credit creditAcc = (Credit) childrenAccounts[i];
+				System.out.println("\n\nThe current array member " + i  + ": is of type of Credit account ");
+				try {
+					if (creditAcc.equals(childrenAccounts[i])) 
+					{
+						System.out.println("CreditAcc " + creditAcc.toString() + " and array member "  + childrenAccounts[i].toString() + "are the same." );
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println("\n***\nError: Equals method requires closeDate member not to be null\n" + e.getMessage());
+				}
+			}
+			
+			if (childrenAccounts[i] instanceof Savings)
+			{
+				Savings savingsAcc = (Savings) childrenAccounts[i];
+				System.out.println("\n\nThe current array member " + i  + ": is of type of Savings account ");
+				
+				System.out.println("Savings account balance: "  + savingsAcc.getBalance() + " before deposit.");
+				savingsAcc.deposit(1000.00);
+				System.out.println("Savings balance after 1000.00 deposit : " + savingsAcc.getBalance());
+			}
+			
+		}
+		
+		/*                      **** OUTPUT ****
+		 * 
+		    The current array member 0: is of type of Checking account 
+			Current balance on your checkingAccount: 5500.0
+			Withdrawal amount: -1.00000000099E9. Withdrawing...
+			Insufficient funds
+			Current balance of checking Account: 5500.0
+			
+			
+			The current array member 1: is of type of Savings account 
+			Savings account balance: 10000.0 before deposit.
+			Current balance: 11000.0
+			Savings balance after 1000.00 deposit : 11000.0
+			
+			
+			The current array member 2: is of type of Credit account 
+			
+			***
+			Error: Equals method requires closeDate member not to be null
+			Cannot invoke "java.time.LocalDate.equals(Object)" because the return value of "Account.getClose()" is null
+
+		 */
 		
 	}
 	
