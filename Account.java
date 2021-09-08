@@ -16,7 +16,7 @@ public abstract class Account {
     private final static boolean DEFAULT_JOINT = false;
     private final static int DEFAULT_JOINTID = -1;
     private final static LocalDate DEFAULT_OPEN_DATE = LocalDate.now();
-    private final static LocalDate DEFAULT_CLOSE_DATE = null;
+    private final static int DEFAULT_CLOSE_TERM = 100;
 
     // Constructors
     // Utilizing automatic assignment of account number
@@ -35,7 +35,7 @@ public abstract class Account {
             this.joint = joint;
             this.jointID = jointID;
             this.open = open;
-            this.close = DEFAULT_CLOSE_DATE;
+            this.close = open.plusYears(DEFAULT_CLOSE_TERM);
         }
     }
 
